@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // handle Form Data
 app.use(
   cookieSession({
     name: "session",
-    keys: ["@js-ecom"],
+    keys: ["@js:ecom"],
   })
 );
 
