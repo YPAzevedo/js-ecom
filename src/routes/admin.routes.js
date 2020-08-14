@@ -2,18 +2,18 @@ const express = require("express");
 const { validationResult, check } = require("express-validator");
 const usersRepository = require("../repositories/users");
 
-const loginTemplate = require("../views/admin/login");
-const signupTemplate = require("../views/admin/signup");
+const loginTemplate = require("../views/admin/auth/login");
+const signupTemplate = require("../views/admin/auth/signup");
 
 const {
   validateEmail: signupValidateEmail,
   validatePassword: signupValidatePassword,
-} = require("./admin.signup.validators");
+} = require("./validators/admin.signup.validators");
 
 const {
   validateEmail: loginValidateEmail,
   validatePassword: loginValidatePassword,
-} = require("./admin.login.validators");
+} = require("./validators/admin.login.validators");
 
 const adminRouter = express.Router();
 
@@ -34,15 +34,13 @@ adminRouter.post(
 
     const validationErrors = validationResult(req);
 
-    if (validationErrors.errors) {
+    if (validationErrors.errors.length) {
       return res.send(loginTemplate(validationErrors));
     }
 
     req.session.userId = user.id;
 
-    return res.send(`
-    <h1>Logged in as: ${req.body.email} - ${user.id}</h1>
-  `);
+    return res.redirect("/admin/products");
   }
 );
 
@@ -60,7 +58,7 @@ adminRouter.post(
 
     const validationErrors = validationResult(req);
 
-    if (validationErrors.errors) {
+    if (validationErrors.errors.length) {
       return res.send(signupTemplate(validationErrors));
     }
 
@@ -68,9 +66,7 @@ adminRouter.post(
 
     req.session.userId = user.id;
 
-    return res.send(`
-    <h1>Account created for: ${req.body.email}</h1>
-  `);
+    return res.redirect("/admin/products");
   }
 );
 

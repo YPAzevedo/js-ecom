@@ -5,7 +5,8 @@ const cookieSession = require("cookie-session");
 const routes = require("./routes/routes");
 
 const app = express();
-app.use(express.json()); // handle JSON
+
+app.use(express.static("src/public"));
 app.use(bodyParser.urlencoded({ extended: true })); // handle Form Data
 app.use(
   cookieSession({
@@ -16,6 +17,6 @@ app.use(
 
 const PORT = process.env.PORT || 3333;
 
-app.use(routes)
+app.use(routes);
 
 app.listen(PORT, () => console.log(`🔥 Server running on: ${PORT}`));

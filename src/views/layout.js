@@ -1,39 +1,40 @@
-module.exports = (content) => `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      * {
-        padding:0;
-        margin: 0;
-        box-sizing: border-box;
-        font-family: 'Baloo Tamma 2', sans-serif
-      }
+module.exports = (content) => {
+  return `
+    <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shop</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"></link>
+      </head>
 
-      html, body {
-        height: 100vh;
-      }
+      <body class="admin">
+        <header>
+          <nav class="navbar navbar-bottom">
+            <div class="container navbar-container">
+              <div>
+                <a href="/admin/products">
+                  <h3 class="title">Admin Panel</h3>
+                </a>
+              </div>
+              <div class="navbar-item">
+                <div class="navbar-buttons">
+                  <div class="navbar-item">
+                    <a href="/admin/products"><i class="fa fa-star"></i> Products</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </header>
+        <div class="container">
+          ${content}
+        </div>
+      </body>
+    </html>
+  `;
+};
 
-      #root {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-    </style>
-    <title>E-COMMERCE</title>
-  </head>
-  <body>
-    <header>
-      <span>🛒 My Store</span>
-      <a href="/login">Login</a>
-      <a href="/signup">Sign up</a>
-    </header>
-    <main id="root">
-      ${content}
-    </main>
-  </body>
-  </html>
-`;

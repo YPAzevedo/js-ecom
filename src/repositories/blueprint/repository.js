@@ -30,20 +30,13 @@ module.exports = class Repository {
     record.id = this.randomId();
     const records = await this.getAll();
 
-    const salt = crypto.randomBytes(8).toString("hex");
-    const hashed = await scrypt(record.password, salt, 64);
-
-    const rec = record.password
-      ? { ...record, password: `${hashed.toString("hex")}.${salt}` }
-      : record;
-
-    records.push(rec);
+    records.push(record);
 
     try {
       await this.writeAll(records);
-      return rec;
+      return record;
     } catch (error) {
-      throw new Error("Failed to create user");
+      throw new Error("Failed to create record");
     }
   }
 
